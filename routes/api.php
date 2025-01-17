@@ -13,3 +13,8 @@ Route::post('/register', [ApiController::class, 'register']);
 Route::post('/login', [ApiController::class, 'login']);
 Route::post('/create_product', [ApiController::class, 'create_product']);
 Route::post('/edit_product', [ApiController::class, 'edit_product']);
+
+Route::get('/', [ApiController::class, 'index']);
+Route::get('/byName', [ApiController::class, 'by_name']);
+Route::get('/byPrice', [ApiController::class, 'by_price']);
+Route::get('/search', [ApiController::class, 'search']);

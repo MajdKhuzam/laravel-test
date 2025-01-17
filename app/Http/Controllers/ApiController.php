@@ -103,4 +103,26 @@ class ApiController extends Controller
         }
         return response()->json($attributes, 201);
     }
+
+    public function index(){
+        $products = Products::all();
+        return response()->json($products);
+    }
+    
+    public function by_name(){
+        $products = Products::all()->sortBy('product');
+        return response()->json($products);
+    }
+    
+    public function by_price(){
+        $products = Products::all()->sortBy('price');
+        return response()->json($products);
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+        $results = Products::where('product', 'like', "%$search%")->get();
+        return response()->json($results);
+    }
+
 }
