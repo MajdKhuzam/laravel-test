@@ -85,7 +85,9 @@ class ApiController extends Controller
             'image' => 'images/' . $imageName,
         ]);
 
-        return response()->json($attributes, 201);
+        return response()->json(['product' => request('product'),
+            'price' => request('price'),
+            'image' => 'images/' . $imageName,], 201);
     }
 
     public function edit_product(Products $product){
