@@ -93,17 +93,24 @@ class ApiController extends Controller
     public function edit_product(Products $product){
         $product = Products::find(request('id'));
 
-        $attributes = $product->update([
-            'product' => request('product'),
-            'price' => request('price'),
-        ]);
+        // $attributes = $product->update([
+        //     'product' => request('product'),
+        //     'price' => request('price'),
+        // ]);
+        if(request()->has('product')){
+            $product->update(['product' => request('product')]);
+        }
+
+        if(request()->has('price')){
+            $product->update(['price' => request('price')]);
+        }
 
         if(request()->has('image')){
             $imageName = time().'.'.request('image')->extension();
             request()->image->move(public_path('images'), $imageName);
             $product->update(['image' => 'images/' . $imageName]);
         }
-        return response()->json($attributes, 201);
+        return response()->json($product ,201);
     }
 
     public function index(){
