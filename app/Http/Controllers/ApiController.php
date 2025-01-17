@@ -125,4 +125,10 @@ class ApiController extends Controller
         return response()->json($results);
     }
 
+    public function destroy(Products $product){
+        $product = Products::find(request('id'));
+        $product->delete();
+        return response()->json('Deleted Successfully');
+    }
+
 }

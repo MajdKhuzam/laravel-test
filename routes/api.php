@@ -18,3 +18,5 @@ Route::get('/', [ApiController::class, 'index']);
 Route::get('/byName', [ApiController::class, 'by_name']);
 Route::get('/byPrice', [ApiController::class, 'by_price']);
 Route::get('/search', [ApiController::class, 'search']);
+
+Route::delete('/delete-product', [ApiController::class, 'destroy']);
