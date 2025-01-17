@@ -1,9 +1,11 @@
-@props(['name' => 'Unknown', 'price' => '$', 'id' => 0])
+@props(['name' => 'Unknown', 'price' => '$', 'image' => '', 'id' => 0])
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-    <a href="#">
-        <img class="p-8 rounded-t-lg" src="/docs/images/products/apple-watch.png" alt="product image" />
-    </a>
+    <div class="flex justify-center items-center">    
+        <a href="#">
+            <img class="p-8 max-h-96 max-w-96 rounded-t-lg" src={{ $image }} alt="product image" />
+        </a>
+    </div>
     <div class="px-5 pb-5">
         <a href="#">
             <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{ $name }}</h5>

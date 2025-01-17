@@ -19,7 +19,7 @@
     </div>
     <div class="flex items-center justify-between grid grid-cols-3 gap-4">
         @foreach ($products as $product)
-            <x-product-card :name="$product->product" :price="$product->price" :id="$product->id"></x-product-card>
+            <x-product-card :name="$product->product" :price="$product->price" :image="$product->image" :id="$product->id"></x-product-card>
         @endforeach
     </div>
 </x-layout>

@@ -25,12 +25,19 @@ class ProductsController extends Controller
 
     public function store()
     {
-        $attributes = request()->validate([
+        request()->validate([
             'product' => ['required'],
             'price' => ['required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
         ]);
 
-        Products::create($attributes);
+        $imageName = time().'.'.request('image')->extension();
+        request()->image->move(public_path('images'), $imageName);
+        Products::create([
+            'product' => request('product'),
+            'price' => request('price'),
+            'image' => 'images/' . $imageName,
+        ]);
 
         return redirect('/');
     }
@@ -42,16 +49,18 @@ class ProductsController extends Controller
 
     public function update(Products $product)
     {
-        $attributes = request()->validate([
-            'product' => ['required'],
-            'price' => ['required'],
-        ]);
         $product = Products::find($product->id);
 
         $product->update([
             'product' => request('product'),
             'price' => request('price'),
         ]);
+
+        if(request()->has('image')){
+            $imageName = time().'.'.request('image')->extension();
+            request()->image->move(public_path('images'), $imageName);
+            $product->update(['image' => 'images/' . $imageName]);
+        }
 
         return redirect('/');
     }

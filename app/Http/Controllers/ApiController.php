@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,26 +44,63 @@ class ApiController extends Controller
     
     }
 
-    // public function login(Request $request){
-    //     $validator = request()->validate([
-    //         'email' => ['required', 'email'],
-    //         'password' => ['required'],
-    //     ]);
+    public function login(Request $request)
+    {   
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
+        $user = User::where('email', $request->email)->first();
 
-    //     if(!Auth::attempt($validator)){
-    //         return response()->json([
-    //             'message' => 'Login fails'
-    //         ], 422);
-    //     }
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => ['These credentials do not match our records.']
+            ], 404);
+        }
 
-    //     request()->session()->regenerate();
+        $token = $user->createToken('my-app-token')->plainTextToken;
 
-    //     return response()->json([
-    //         'message' => 'Login successfull',
-    //         'data' => $validator
-    //     ], 200);
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
 
-    // }
-    
+        return response()->json($response, 201);
+    }
+
+    public function create_product(Request $request){
+        $attributes = $request->validate([
+            'product' => ['required'],
+            'price' => ['required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+        ]);
+
+        $imageName = time().'.'.request('image')->extension();
+        request()->image->move(public_path('images'), $imageName);
+
+        Products::create([
+            'product' => request('product'),
+            'price' => request('price'),
+            'image' => 'images/' . $imageName,
+        ]);
+
+        return response()->json($attributes, 201);
+    }
+
+    public function edit_product(Products $product){
+        $product = Products::find(request('id'));
+
+        $attributes = $product->update([
+            'product' => request('product'),
+            'price' => request('price'),
+        ]);
+
+        if(request()->has('image')){
+            $imageName = time().'.'.request('image')->extension();
+            request()->image->move(public_path('images'), $imageName);
+            $product->update(['image' => 'images/' . $imageName]);
+        }
+        return response()->json($attributes, 201);
+    }
 }

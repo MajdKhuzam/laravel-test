@@ -11,3 +11,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [ApiController::class, 'register']);
 Route::post('/login', [ApiController::class, 'login']);
+Route::post('/create_product', [ApiController::class, 'create_product']);
+Route::post('/edit_product', [ApiController::class, 'edit_product']);
