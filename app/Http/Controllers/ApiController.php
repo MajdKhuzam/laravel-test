@@ -120,12 +120,19 @@ class ApiController extends Controller
     
     public function by_name(){
         $products = Products::all()->sortBy('product');
-        return response()->json($products);
+        $p = [];
+        foreach($products as $product){
+            $p[] = $product;
+        }
+        return response()->json($p);
     }
     
     public function by_price(){
         $products = Products::all()->sortBy('price');
-        return response()->json($products);
+        foreach($products as $product){
+            $p[] = $product;
+        }
+        return response()->json($p);
     }
 
     public function search(Request $request){
