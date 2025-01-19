@@ -1,7 +1,13 @@
 <x-layout heading="Home Page">
-    <div class="flex justify-start space-x-4 mb-4">
-        <a href="/byName" class="font-semibold text-indigo-600 hover:text-indigo-500">Sort by Name</a>
-        <a href="/byPrice" class="font-semibold text-indigo-600 hover:text-indigo-500">Sort by Price</a>
+    
+    <div class="flex justify-between">
+        <div class="flex justify-start space-x-4 mb-4">
+            <a href="/byName" class="font-semibold text-indigo-600 hover:text-indigo-500">Sort by Name</a>
+            <a href="/byPrice" class="font-semibold text-indigo-600 hover:text-indigo-500">Sort by Price</a>
+        </div>
+        <div>
+            <a href="/products-pdf" class="font-semibold text-red-600 hover:text-red-500">Download PDF</a>
+        </div>
     </div>
     <div class="mb-4">
         <form class="max-w-md mx-auto" action="/search" method="GET">   

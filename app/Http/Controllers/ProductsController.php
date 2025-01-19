@@ -79,4 +79,5 @@ class ProductsController extends Controller
 
         return view('home', ['products' => $results]);
     }
+
 }

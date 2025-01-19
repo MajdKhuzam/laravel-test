@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\QRcodeController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/about', function(){
-    return view('about');
-});
+// Route::get('/about', function(){
+//     return view('about');
+// });
+Route::get('/about', [QRcodeController::class, 'generate']);
 
 Route::get('/create_product', function(){
     return view('create_product');
@@ -38,3 +42,10 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
+
+
+// but i have problem in pdf style (not styled in tailwindcss)
+// try use tailwindcss locally not  online
+Route::get('/products-pdf', [PdfController::class, 'generatePDF']);
+
+Route::get('/qrcode', [QRcodeController::class, 'generate']);
