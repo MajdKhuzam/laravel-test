@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnythingController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\QRcodeController;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/about', function(){
 //     return view('about');
 // });
+
+
+Route::get('/anything', [AnythingController::class, 'index']);
+
+
 Route::get('/about', [QRcodeController::class, 'generate']);
 
 Route::get('/create_product', function(){
