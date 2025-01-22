@@ -3,8 +3,15 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 class="mt-4 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Register your account</h2>
         </div>
+        @if ($errors->any())
+            <ul class="mt-4">
+              @foreach ($errors->all() as $error)
+                  <li class="mt-1 ml-2 text-xs text-red-500 flex justify-center items-center italic">{{ $error }}</li>
+              @endforeach
+            </ul>
+        @endif
       
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div class="mt-1 sm:mx-auto sm:w-full sm:max-w-sm">
           <form class="space-y-6" method="POST" action="/register">
             @csrf
             <div class="flex items-center justify-between ">
