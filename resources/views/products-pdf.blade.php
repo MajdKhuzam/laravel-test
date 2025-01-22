@@ -40,7 +40,7 @@
   <tr>
       <td>{{ $product->id }}</td>
       <td>{{ $product->product }}</td>
-      <td>{{ $product->price }}</td>
+      <td>${{ $product->price }}</td>
     </tr>
     @endforeach
 

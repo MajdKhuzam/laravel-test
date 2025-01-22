@@ -1,5 +1,5 @@
 <x-layout heading="Anything">
     <div>
-    {{ $result }}
+    Distance = {{ $result }} KM.
     </div>
 </x-layout>
