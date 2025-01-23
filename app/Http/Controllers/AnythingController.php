@@ -62,7 +62,7 @@ class AnythingController extends Controller
 
     public function index()
     {
-        $point1 = [[52, 03, 59, 'N'], [005, 42, 53, 'W']];
+        $point1 = [[52, 03, 59, 'N'], [48, 42, 53, 'W']];
         $point2 = [[58, 38, 38, 'N'], [006, 04, 12, 'E']];
         $result = $this->haversine($point1, $point2);
 

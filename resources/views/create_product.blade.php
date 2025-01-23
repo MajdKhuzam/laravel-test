@@ -7,6 +7,11 @@
             <div class="mt-2">
               <input type="text" name="product" id="product" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
             </div>
+            @if ($errors->has('product'))
+              <ul class="mt-1">
+                    <li class="mt-1 ml-2 text-xs text-red-500 flex justify-center items-center italic">{{ $errors->first('product') }}</li>
+              </ul>
+            @endif
           </div>
     
           <div>
@@ -16,11 +21,23 @@
             <div class="mt-2">
               <input type="text" name="price" id="price" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
             </div>
+            @if ($errors->has('price'))
+              <ul class="mt-1">
+                    <li class="mt-1 ml-2 text-xs text-red-500 flex justify-center items-center italic">{{ $errors->first('price') }}</li>
+              </ul>
+            @endif
           </div>
-
           <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900" for="image_input">Upload Image</label>
-            <input name="image" class="p-2 block w-auto text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="image_input" type="file" accept="image/png, image/jpeg">
+
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900" for="image_input">Upload Image</label>
+              <input name="image" required class="p-2 block w-auto text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="image_input" type="file" accept="image/png, image/jpeg">
+            </div>
+            @if ($errors->has('image'))
+              <ul class="mt-1">
+                    <li class="mt-1 ml-2 text-xs text-red-500 flex justify-center items-center italic">{{ $errors->first('image') }}</li>
+              </ul>
+            @endif
           </div>
     
           <div class="flex justify-end">
