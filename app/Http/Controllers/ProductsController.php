@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProductsController extends Controller
 {
@@ -23,15 +25,21 @@ class ProductsController extends Controller
         return view('home', ['products' => $products]);
     }
 
+    public function create()
+    {
+        Gate::authorize('admin-access');
+        return view('create_product');
+    }
     public function store()
     {
+        Gate::authorize('admin-access');
         request()->validate([
             'product' => ['required', 'min:3'],
             'price' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
         ]);
 
-        $imageName = time().'.'.request('image')->extension();
+        $imageName = time() . '.' . request('image')->extension();
         request()->image->move(public_path('images'), $imageName);
         Products::create([
             'product' => request('product'),
@@ -44,11 +52,14 @@ class ProductsController extends Controller
 
     public function edit(Products $product)
     {
+        Gate::authorize('admin-access');
         return view('product_edit', ['product' => $product]);
     }
 
     public function update(Products $product)
     {
+        Gate::authorize('admin-access');
+
         $product = Products::find($product->id);
 
         $product->update([
@@ -56,8 +67,8 @@ class ProductsController extends Controller
             'price' => request('price'),
         ]);
 
-        if(request()->has('image')){
-            $imageName = time().'.'.request('image')->extension();
+        if (request()->has('image')) {
+            $imageName = time() . '.' . request('image')->extension();
             request()->image->move(public_path('images'), $imageName);
             $product->update(['image' => 'images/' . $imageName]);
         }
@@ -67,6 +78,8 @@ class ProductsController extends Controller
 
     public function destroy(Products $product)
     {
+        Gate::authorize('admin-access');
+        
         $product = Products::find($product->id);
         $product->delete();
         return redirect('/');
@@ -79,5 +92,4 @@ class ProductsController extends Controller
 
         return view('home', ['products' => $results]);
     }
-
 }

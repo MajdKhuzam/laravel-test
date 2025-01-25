@@ -22,15 +22,16 @@ Route::get('/anything', [AnythingController::class, 'index']);
 
 Route::get('/about', [QRcodeController::class, 'generate']);
 
-Route::get('/create_product', function(){
-    return view('create_product');
-});
+// Route::get('/create_product', function(){
+//     return view('create_product');
+// });
 
 Route::get('/', [ProductsController::class, 'index']);
 Route::get('/byName', [ProductsController::class, 'by_name']);
 Route::get('/byPrice', [ProductsController::class, 'by_price']);
 Route::get('/search', [ProductsController::class, 'search']);
 
+Route::get('/create_product', [ProductsController::class, 'create']);
 Route::post('/create_product', [ProductsController::class, 'store']);
 Route::get('/products/{product}/edit', [ProductsController::class, 'edit']);
 Route::patch('/products/{product}/edit', [ProductsController::class, 'update']);
