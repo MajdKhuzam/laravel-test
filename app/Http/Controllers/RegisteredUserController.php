@@ -11,6 +11,8 @@ use Illuminate\Validation\Rules\Password;
 class RegisteredUserController extends Controller
 {
     public function create(){
+        if(Auth::check())
+            return redirect('/');
         return view('auth.register');
     }
 
@@ -36,6 +38,8 @@ class RegisteredUserController extends Controller
 
     public function profile(){
         // return request('type');
+        if(Auth::guest())
+            return redirect('login');
         return view('profile', ['user' => Auth::user()]);
     }
     
@@ -59,6 +63,8 @@ class RegisteredUserController extends Controller
     }
 
     public function change_password(){
+        if(Auth::guest())
+            abort(403);
         return view('change_password');
     }
 

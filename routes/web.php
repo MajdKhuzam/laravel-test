@@ -40,8 +40,8 @@ Route::delete('/products/{product}/edit', [ProductsController::class, 'destroy']
 Route::get('/profile', [RegisteredUserController::class, 'profile']);
 Route::patch('/profile', [RegisteredUserController::class, 'update']);
 
-Route::get('/change_password', [RegisteredUserController::class, 'change_password']);
-Route::patch('/change_password', [RegisteredUserController::class, 'update_password']);
+Route::get('/change-password', [RegisteredUserController::class, 'change_password']);
+Route::patch('/change-password', [RegisteredUserController::class, 'update_password']);
 
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
